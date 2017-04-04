@@ -1,0 +1,356 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/benmosher/eslint-plugin-import"
+
+    >eslint-plugin-import (v2.2.0)</a>
+</h1>
+<h4>Import with sanity.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.eslint-plugin-import">module eslint-plugin-import</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">eslint-plugin-import.</span>ExportMap</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">eslint-plugin-import.</span>configs</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">eslint-plugin-import.</span>importDeclaration</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">eslint-plugin-import.</span>rules</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.eslint-plugin-import.ExportMap">module eslint-plugin-import.ExportMap</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.eslint-plugin-import.ExportMap.default">
+            function <span class="apidocSignatureSpan">eslint-plugin-import.ExportMap.</span>default
+            <span class="apidocSignatureSpan">(path)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.eslint-plugin-import.ExportMap.recursivePatternCapture">
+            function <span class="apidocSignatureSpan">eslint-plugin-import.ExportMap.</span>recursivePatternCapture
+            <span class="apidocSignatureSpan">(pattern, callback)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.eslint-plugin-import.importDeclaration">module eslint-plugin-import.importDeclaration</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.eslint-plugin-import.importDeclaration.default">
+            function <span class="apidocSignatureSpan">eslint-plugin-import.importDeclaration.</span>default
+            <span class="apidocSignatureSpan">(context)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.eslint-plugin-import" id="apidoc.module.eslint-plugin-import">module eslint-plugin-import</a></h1>
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.eslint-plugin-import.ExportMap" id="apidoc.module.eslint-plugin-import.ExportMap">module eslint-plugin-import.ExportMap</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.eslint-plugin-import.ExportMap.default" id="apidoc.element.eslint-plugin-import.ExportMap.default">
+        function <span class="apidocSignatureSpan">eslint-plugin-import.ExportMap.</span>default
+        <span class="apidocSignatureSpan">(path)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">class ExportMap {
+  constructor(path) {
+    this.path = path;
+    this.namespace = new Map();
+    // todo: restructure to key on path, value is resolver + map of names
+    this.reexports = new Map();
+    this.dependencies = new Map();
+    this.errors = [];
+  }
+
+  get hasDefault() {
+    return this.get(&#x27;default&#x27;) != null;
+  } // stronger than this.has
+
+  get size() {
+    let size = this.namespace.size + this.reexports.size;
+    this.dependencies.forEach(dep =&#x3e; size += dep().size);
+    return size;
+  }
+
+<span class="apidocCodeCommentSpan">  /**
+   * Note that this does not check explicitly re-exported names for existence
+   * in the base namespace, but it will expand all `export * from &#x27;...&#x27;` exports
+   * if not found in the explicit namespace.
+   * @param  {string}  name
+   * @return {Boolean} true if `name` is exported by this module.
+   */
+</span>  has(name) {
+    if (this.namespace.has(name)) return true;
+    if (this.reexports.has(name)) return true;
+
+    // default exports must be explicitly re-exported (#328)
+    if (name !== &#x27;default&#x27;) {
+      for (let dep of this.dependencies.values()) {
+        let innerMap = dep();
+
+        // todo: report as unresolved?
+        if (!innerMap) continue;
+
+        if (innerMap.has(name)) return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * ensure that imported name fully resolves.
+   * @param  {[type]}  name [description]
+   * @return {Boolean}      [description]
+   */
+  hasDeep(name) {
+    if (this.namespace.has(name)) return { found: true, path: [this] };
+
+    if (this.reexports.has(name)) {
+      const reexports = this.reexports.get(name),
+            imported = reexports.getImport();
+
+      // if import is ignored, return explicit &#x27;null&#x27;
+      if (imported == null) return { found: true, path: [this] };
+
+      // safeguard against cycles, only if name matches
+      if (imported.path === this.path &#x26;&#x26; reexports.local === name) {
+        return { found: false, path: [this] };
+      }
+
+      const deep = imported.hasDeep(reexports.local);
+      deep.path.unshift(this);
+
+      return deep;
+    }
+
+    // default exports must be explicitly re-exported (#328)
+    if (name !== &#x27;default&#x27;) {
+      for (let dep of this.dependencies.values()) {
+        let innerMap = dep();
+        // todo: report as unresolved?
+        if (!innerMap) continue;
+
+        // safeguard against cycles
+        if (innerMap.path === this.path) continue;
+
+        let innerValue = innerMap.hasDeep(name);
+        if (innerValue.found) {
+          innerValue.path.unshift(this);
+          return innerValue;
+        }
+      }
+    }
+
+    return { found: false, path: [this] };
+  }
+
+  get(name) {
+    if (this.namespace.has(name)) return this.namespace.get(name);
+
+    if (this.reexports.has(name)) {
+      const reexports = this.reexports.get(name),
+            imported = reexports.getImport();
+
+      // if import is ignored, return explicit &#x27;null&#x27;
+      if (imported == null) return null;
+
+      // safeguard against cycles, only if name matches
+      if (imported.path === this.path &#x26;&#x26; reexports.local === name) return undefined;
+
+      return imported.get(reexports.local);
+    }
+
+    // default exports must be explicitly re-exported (#328)
+    if (name !== &#x27;default&#x27;) {
+      for (let dep of this.dependencies.values()) {
+        let innerMap = dep();
+        // todo: report as unresolved?
+        if (!innerMap) continue;
+
+        // safeguard against cycles
+        if (innerMap.path === this.path) continue;
+
+        let innerValue = innerMap.get(name);
+        if (innerValue !== undefined) return innerValue;
+      }
+    }
+
+    return undefined;
+  }
+
+  forEach(callback, thisArg) {
+    this.namespace.forEach((v, n) =&#x3e; callback.call(thisArg, v, n, this));
+
+    this.reexports.forEach((reexports, name) =&#x3e; {
+      const reexported = reexports.getImport();
+      // can&#x27;t look up meta for ignored re-exports (#348)
+      callback.call(thisArg, reexported &#x26;&#x26; reexported.get(reexports.local), name, this);
+    });
+
+    this.dependencies.forEach(dep =&#x3e; dep().forEach((v, n) =&#x3e; n !== &#x27;default&#x27; &#x26;&#x26; callback.call(thisArg, v, n, this)));
+  }
+
+  // todo: keys, values, entries? ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.eslint-plugin-import.ExportMap.recursivePatternCapture" id="apidoc.element.eslint-plugin-import.ExportMap.recursivePatternCapture">
+        function <span class="apidocSignatureSpan">eslint-plugin-import.ExportMap.</span>recursivePatternCapture
+        <span class="apidocSignatureSpan">(pattern, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function recursivePatternCapture(pattern, callback) {
+  switch (pattern.type) {
+    case &#x27;Identifier&#x27;:
+      // base case
+      callback(pattern);
+      break;
+
+    case &#x27;ObjectPattern&#x27;:
+      pattern.properties.forEach(p =&#x3e; {
+        recursivePatternCapture(p.value, callback);
+      });
+      break;
+
+    case &#x27;ArrayPattern&#x27;:
+      pattern.elements.forEach(element =&#x3e; {
+        if (element == null) return;
+        recursivePatternCapture(element, callback);
+      });
+      break;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.eslint-plugin-import.importDeclaration" id="apidoc.module.eslint-plugin-import.importDeclaration">module eslint-plugin-import.importDeclaration</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.eslint-plugin-import.importDeclaration.default" id="apidoc.element.eslint-plugin-import.importDeclaration.default">
+        function <span class="apidocSignatureSpan">eslint-plugin-import.importDeclaration.</span>default
+        <span class="apidocSignatureSpan">(context)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function importDeclaration(context) {
+  var ancestors = context.getAncestors();
+  return ancestors[ancestors.length - 1];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
