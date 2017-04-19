@@ -1,34 +1,37 @@
-<svg height="494" width="720" xmlns="http://www.w3.org/2000/svg">
-<rect height="494" fill="#555" width="720"></rect>
+<svg height="542" width="720" xmlns="http://www.w3.org/2000/svg">
+<rect height="542" fill="#555" width="720"></rect>
 <text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
-<tspan x="10" y="26">├── UNMET PEER DEPENDENCY eslint@2.x - 3.x</tspan>
-<tspan x="10" y="42">└─┬ eslint-plugin-import@2.2.0 </tspan>
-<tspan x="10" y="58">  ├── builtin-modules@1.1.1 </tspan>
-<tspan x="10" y="74">  ├── contains-path@0.1.0 </tspan>
-<tspan x="10" y="90">  ├─┬ debug@2.6.3 </tspan>
-<tspan x="10" y="106">  │ └── ms@0.7.2 </tspan>
-<tspan x="10" y="122">  ├─┬ doctrine@1.5.0 </tspan>
-<tspan x="10" y="138">  │ ├── esutils@2.0.2 </tspan>
-<tspan x="10" y="154">  │ └── isarray@1.0.0 </tspan>
-<tspan x="10" y="170">  ├─┬ eslint-import-resolver-node@0.2.3 </tspan>
-<tspan x="10" y="186">  │ ├── object-assign@4.1.1 </tspan>
-<tspan x="10" y="202">  │ └─┬ resolve@1.3.2 </tspan>
-<tspan x="10" y="218">  │   └── path-parse@1.0.5 </tspan>
-<tspan x="10" y="234">  ├─┬ eslint-module-utils@2.0.0 </tspan>
-<tspan x="10" y="250">  │ ├─┬ debug@2.2.0 </tspan>
-<tspan x="10" y="266">  │ │ └── ms@0.7.1 </tspan>
-<tspan x="10" y="282">  │ └── pkg-dir@1.0.0 </tspan>
-<tspan x="10" y="298">  ├─┬ has@1.0.1 </tspan>
-<tspan x="10" y="314">  │ └── function-bind@1.1.0 </tspan>
-<tspan x="10" y="330">  ├── lodash.cond@4.5.2 </tspan>
-<tspan x="10" y="346">  ├─┬ minimatch@3.0.3 </tspan>
-<tspan x="10" y="362">  │ └─┬ brace-expansion@1.1.6 </tspan>
-<tspan x="10" y="378">  │   ├── balanced-match@0.4.2 </tspan>
-<tspan x="10" y="394">  │   └── concat-map@0.0.1 </tspan>
-<tspan x="10" y="410">  └─┬ pkg-up@1.0.0 </tspan>
-<tspan x="10" y="426">    └─┬ find-up@1.1.2 </tspan>
-<tspan x="10" y="442">      ├── path-exists@2.1.0 </tspan>
-<tspan x="10" y="458">      └─┬ pinkie-promise@2.0.1 </tspan>
-<tspan x="10" y="474">        └── pinkie@2.0.4</tspan>
+<tspan x="10" y="26">2 megabytes installed</tspan>
+<tspan x="10" y="42"></tspan>
+<tspan x="10" y="58">node_modules</tspan>
+<tspan x="10" y="74">├── UNMET PEER DEPENDENCY eslint@2.x - 3.x</tspan>
+<tspan x="10" y="90">└─┬ eslint-plugin-import@2.2.0 </tspan>
+<tspan x="10" y="106">  ├── builtin-modules@1.1.1 </tspan>
+<tspan x="10" y="122">  ├── contains-path@0.1.0 </tspan>
+<tspan x="10" y="138">  ├─┬ debug@2.6.3 </tspan>
+<tspan x="10" y="154">  │ └── ms@0.7.2 </tspan>
+<tspan x="10" y="170">  ├─┬ doctrine@1.5.0 </tspan>
+<tspan x="10" y="186">  │ ├── esutils@2.0.2 </tspan>
+<tspan x="10" y="202">  │ └── isarray@1.0.0 </tspan>
+<tspan x="10" y="218">  ├─┬ eslint-import-resolver-node@0.2.3 </tspan>
+<tspan x="10" y="234">  │ ├── object-assign@4.1.1 </tspan>
+<tspan x="10" y="250">  │ └─┬ resolve@1.3.2 </tspan>
+<tspan x="10" y="266">  │   └── path-parse@1.0.5 </tspan>
+<tspan x="10" y="282">  ├─┬ eslint-module-utils@2.0.0 </tspan>
+<tspan x="10" y="298">  │ ├─┬ debug@2.2.0 </tspan>
+<tspan x="10" y="314">  │ │ └── ms@0.7.1 </tspan>
+<tspan x="10" y="330">  │ └── pkg-dir@1.0.0 </tspan>
+<tspan x="10" y="346">  ├─┬ has@1.0.1 </tspan>
+<tspan x="10" y="362">  │ └── function-bind@1.1.0 </tspan>
+<tspan x="10" y="378">  ├── lodash.cond@4.5.2 </tspan>
+<tspan x="10" y="394">  ├─┬ minimatch@3.0.3 </tspan>
+<tspan x="10" y="410">  │ └─┬ brace-expansion@1.1.7 </tspan>
+<tspan x="10" y="426">  │   ├── balanced-match@0.4.2 </tspan>
+<tspan x="10" y="442">  │   └── concat-map@0.0.1 </tspan>
+<tspan x="10" y="458">  └─┬ pkg-up@1.0.0 </tspan>
+<tspan x="10" y="474">    └─┬ find-up@1.1.2 </tspan>
+<tspan x="10" y="490">      ├── path-exists@2.1.0 </tspan>
+<tspan x="10" y="506">      └─┬ pinkie-promise@2.0.1 </tspan>
+<tspan x="10" y="522">        └── pinkie@2.0.4</tspan>
 </text>
 </svg>
